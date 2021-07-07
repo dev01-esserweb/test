@@ -1,6 +1,6 @@
 services:
     test:
-        build: .
+        image: test-again:latest
         restart: always
         ports: 
             - 5000:5000
