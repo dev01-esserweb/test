@@ -1,0 +1,7 @@
+services:
+    test:
+        build: ./
+        restart: always
+        ports: 
+            - 80:80
+            
