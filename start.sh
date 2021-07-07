@@ -3,10 +3,10 @@ set -e
 
     # Si no existe el directorio /app/app
 if [ -f /app/src/app.py ]; then
-    DEFAULT_MODULE_NAME=app.app
+    DEFAULT_MODULE_NAME=src.app
     # Vas a buscar el directorio /src y el archivo app.py (/src/app.py)
 elif [ -f /src/app.py ]; then
-    DEFAULT_MODULE_NAME=app
+    DEFAULT_MODULE_NAME=src.app
 fi
 MODULE_NAME=${MODULE_NAME:-$DEFAULT_MODULE_NAME}
 VARIABLE_NAME=${VARIABLE_NAME:-app}

@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 
 # Copia el archivo start.sh
 COPY ./start.sh /start.sh
-RUN chmod +x start.sh
+RUN chmod +x /start.sh
 
 # Copia el archivo gunicorn_conf.py
 COPY ./gunicorn_conf.py /gunicorn_conf.py

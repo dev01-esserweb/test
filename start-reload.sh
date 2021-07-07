@@ -2,9 +2,9 @@
 set -e
 
 if [ -f /app/src/app.py ]; then
-    DEFAULT_MODULE_NAME=app.app
+    DEFAULT_MODULE_NAME=src.app
 elif [ -f /src/app.py ]; then
-    DEFAULT_MODULE_NAME=app
+    DEFAULT_MODULE_NAME=src.app
 fi
 MODULE_NAME=${MODULE_NAME:-$DEFAULT_MODULE_NAME}
 VARIABLE_NAME=${VARIABLE_NAME:-app}
