@@ -3,5 +3,5 @@ services:
         image: test:latest
         restart: always
         ports: 
-            - 80:80
+            - 5000:5000
             
