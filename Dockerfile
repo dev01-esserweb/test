@@ -1,6 +1,4 @@
-FROM python:3.9.6-slim-buster
-
-ENV PYTHONUNBUFFERED 1 
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
 
 # Dependencies
 COPY ./requirements.txt .
@@ -17,7 +15,7 @@ COPY ./start-reload.sh /start-reload.sh
 RUN chmod +x /start-reload.sh
 
 # Expose the port 5000 in which our application runs
-EXPOSE 5000
+EXPOSE 80
 # Make /app as a working directory in the container
 WORKDIR /app
 # Copy everything from ./src directory to /app in the container
