@@ -2,7 +2,7 @@
 set -e
 
     # Si no existe el directorio /app/app
-if [ -f /src/app/app.py ]; then
+if [ -f /app/src/app.py ]; then
     DEFAULT_MODULE_NAME=app.app
     # Vas a buscar el directorio /src y el archivo app.py (/src/app.py)
 elif [ -f /src/app.py ]; then
