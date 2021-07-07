@@ -24,9 +24,9 @@ services:
             # Crea un punto de entrada 'https' escuchando en el puerto 443
             - --entrypoints.https.address=:443
             # Crea el resolvedor de certificados 'le' para Let's Encrypt
-            - --certificatesresolvers.le.acme.email=francisco@carlatino.com
+            - --certificatesresolvers.le.acme.email=admin@carlatino.com
             # Almacena los certificados en el volumen
-            - --certificatesresolvers.le.storage=/certificates/acme.json
+            - --certificatesresolvers.le.acme.storage=/certificates/acme.json
             # Usamos el TLS Challenge para Let's Encrypt
             - --certificatesresolvers.le.acme.tlschallenge=true
             # Habilitar el log de acceso para peticiones HTTP
