@@ -1,0 +1,36 @@
+version: "3.3"
+services:
+    proxy:
+        ports:
+            - 80:80
+            - 5000:5000
+        command:
+            # Habilitar Docker en Traefik
+            - --providers.docker
+            # Versión del servicio de Traefik
+            - --providers.docker.constraint=Label(`traefik.constraint-label-stack`, `traefik:v2.3`)
+            - --providers.docker.exposedbydefault=false
+            # Traefik log for config and errors
+            - --accesslog
+            # Traefik Log
+            - --log
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.app-traefik-public-http.rule=Host(`test.carlatino.com`)
+            - traefik.services.app-traefik-public.loadbalancer.server.port=80
+
+    test:
+        ports:
+            - 80:80
+        volumes:
+            - .
+        build:
+            context: ./
+            dockerfile: Dockerfile
+
+        command: /start-reload.sh
+        labels:
+            - traefik.enable=true
+            - traefik.constraint-label-stack=traefik:v2.3
+            - traefik.http.routers.app-test-http.rule=PathPrefix(`/api/v1`) || PathPrefix(`/docs`) || PathPrefix(`/redoc`)
+            - traefik.http.services.app-test.loadbalancer.server.port=80
