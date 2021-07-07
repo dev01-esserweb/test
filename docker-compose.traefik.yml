@@ -46,6 +46,6 @@ volumes:
 
 networks:
     # Se utiliza la previamente creada red pública 'traefik-public'
-    # Compartida con otros servicios que necesitan ser públicamente disponibles a través de Traefik
+    # Compartida con otros servicios que necesitan estar públicamente disponibles a través de Traefik
     traefik-public:
         external: true
