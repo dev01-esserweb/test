@@ -1,6 +1,6 @@
 services:
     test:
-        build: ./
+        image: test:latest
         restart: always
         ports: 
             - 80:80
