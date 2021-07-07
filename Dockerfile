@@ -12,4 +12,4 @@ COPY ./src /app/src
 # Install the dependencies
 RUN pip install -r requirements.txt
 # Run the application in the port 8000
-CMD ["uvicorn", "--host", "test.carlatino.com", "--port", "5000", "src.app:app"]
+CMD ["uvicorn", "--host", "0.0.0.0", "--port", "5000", "src.app:app"]
