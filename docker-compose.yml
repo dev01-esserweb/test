@@ -1,6 +1,6 @@
 services:
     test:
-        image: test-api:latest
+        build: ./
         restart: always
         labels:
             # Habilitar Traefik para este servicio "test" en específico
