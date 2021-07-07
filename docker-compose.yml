@@ -10,6 +10,8 @@ services:
             # Dominio que utilizará Traefik 'HTTP'
             - traefik.http.routers.app-http.entrypoints=http
             - traefik.http.routers.app-http.rule=Host(`test.carlatino.com`)
+            # Utilizar la red pública de Traefik
+            - traefik.docker.networks=traefik-public
             # HTTPS
             - traefik.http.routers.app-https.entrypoints=https
             - traefik.http.routers.app-https.rule=Host(`test.carlatino.com`)
@@ -21,8 +23,6 @@ services:
             - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
             # Middleware http a https
             - traefik.http.routers.app-http.middlewares=https-redirect
-            # Utilizar la red pública de Traefik
-            - traefik.docker.networks=traefik-public
         networks:
             # Utilizar la red pública creada para compartir entre Traefik y
             # cualquier otro servicio que necesite estar disponible públicamente con HTTPS
