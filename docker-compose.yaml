@@ -1,6 +1,6 @@
 services:
     test:
-        image: test-again:latest
+        image: test-api:latest
         restart: always
         ports: 
             - 80:80
