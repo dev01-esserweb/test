@@ -38,6 +38,12 @@ services:
             # Y cualquier otro servicio que necesite ser publicamente disponible en HTTPS
             - traefik-public
 
+volumes:
+    # Creamos un volumen para almacenar los certificados de Let's Encrypt
+    # Hay una restricción para asegurarse de que Traefik esté desplegado en el mismo nodo de Docker
+    # que contiene el volumen donde se almacenan los certificados de Let's Encrypt
+    traefik-public-certificates:
+
 networks:
     # Se utiliza la previamente creada red pública 'traefik-public'
     # Compartida con otros servicios que necesitan ser públicamente disponibles a través de Traefik
