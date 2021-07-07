@@ -4,12 +4,16 @@ services:
         image: traefik:v2.3
         ports:
             # Puerto 80, por defecto HTTP, necesario para redireccionar a HTTPS
-            -80:80
+            - 80:80
+            # Puerto 443, por defecto HTTPS
+            - 443:443
         restart: always
         volumes:
             # Para que Traefik pueda leer las etiquetas de otros servicios
             # Canal de comunicación entre Traefik y nuestros servicios
             - /var/run/docker.sock:/var/run/docker.sock:ro
+            # Se monta un volumen para almacenar los certificados
+            - traefik-public-certificates:/certificates
         command:
             # Habilitar Docker in Traefik
             - --providers.docker
@@ -17,6 +21,14 @@ services:
             - --providers.docker.exposedbydefault=false
             # Crea un punto de entrada http en el puerto 80
             - --entrypoints.http.address=:80
+            # Crea un punto de entrada 'https' escuchando en el puerto 443
+            - --entrypoints.https.address=:443
+            # Crea el resolvedor de certificados 'le' para Let's Encrypt
+            - --certificatesresolvers.le.acme.email=francisco@carlatino.com
+            # Almacena los certificados en el volumen
+            - --certificatesresolvers.le.storage=/certificates/acme.json
+            # Usamos el TLS Challenge para Let's Encrypt
+            - --certificatesresolvers.le.acme.tlschallenge=true
             # Habilitar el log de acceso para peticiones HTTP
             - --accesslog
             # Habilita Traefik para el log, configuraciones y errores
