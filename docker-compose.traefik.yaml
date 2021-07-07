@@ -1,0 +1,33 @@
+services:
+    traefik:
+        # Use traefik v2.3.x image
+        image: traefik:v2.3
+        ports:
+            # Puerto 80, por defecto HTTP, necesario para redireccionar a HTTPS
+            -80:80
+        restart: always
+        volumes:
+            # Para que Traefik pueda leer las etiquetas de otros servicios
+            # Canal de comunicación entre Traefik y nuestros servicios
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        command:
+            # Habilitar Docker in Traefik
+            - --providers.docker
+            # No exponer todos los servicios de Docker, solamente los que están explícitamente expuestos
+            - --providers.docker.exposedbydefault=false
+            # Crea un punto de entrada http en el puerto 80
+            - --entrypoints.http.address=:80
+            # Habilitar el log de acceso para peticiones HTTP
+            - --accesslog
+            # Habilita Traefik para el log, configuraciones y errores
+            - --log
+        networks:
+            # Se utiliza la red pública creada para compartir Traefik
+            # Y cualquier otro servicio que necesite ser publicamente disponible en HTTPS
+            - traefik-public
+
+networks:
+    # Se utiliza la previamente creada red pública 'traefik-public'
+    # Compartida con otros servicios que necesitan ser públicamente disponibles a través de Traefik
+    traefik-public:
+        external: true
