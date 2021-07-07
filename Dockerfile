@@ -4,11 +4,15 @@ ENV PYTHONUNBUFFERED 1
 
 # Copia el archivo start.sh
 COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
+RUN chmod +x start.sh
 
 # Copia el archivo gunicorn_conf.py
 COPY ./gunicorn_conf.py /gunicorn_conf.py
-# Expose the port 8000 in which our application runs
+
+COPY ./start-reload.sh /start-reload.sh
+RUN chmod +x /start-reload.sh
+
+# Expose the port 5000 in which our application runs
 EXPOSE 5000
 # Make /app as a working directory in the container
 WORKDIR /app
