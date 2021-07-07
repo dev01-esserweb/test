@@ -2,6 +2,10 @@ FROM python:3.9.6-slim-buster
 
 ENV PYTHONUNBUFFERED 1 
 
+# Dependencies
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
 # Copia el archivo start.sh
 COPY ./start.sh /start.sh
 RUN chmod +x start.sh
@@ -16,9 +20,7 @@ RUN chmod +x /start-reload.sh
 EXPOSE 5000
 # Make /app as a working directory in the container
 WORKDIR /app
-# Copy requirements from host, to docker container in /app 
-COPY ./requirements.txt .
 # Copy everything from ./src directory to /app in the container
 COPY ./src /app/src
-# Install the dependencies
-RUN pip install -r requirements.txt
+
+CMD ["/start.sh"]
